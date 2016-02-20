@@ -1,0 +1,10 @@
+setwd("/Users/hawad/dev/ExData_Plotting1")
+hpc <- read.table("household_power_consumption.txt", header=TRUE, na.strings = "", sep = ";",  stringsAsFactors = FALSE)
+hpc_data <- transform(hpc, Global_active_power = as.numeric(Global_active_power))
+hpc_data$Date <- as.Date(hpc_data$Date, format = "%d/%m/%Y")
+lim_data <- subset(hpc_data, Date  %in% c(as.Date ("2007-02-01"), as.Date("2007-02-02")))
+png(file="plot1.png")
+sapply(hpc_data, class)
+hist(lim_data$Global_active_power, col = "red", main = "Global Active Power", xlab = "Global Active Power (kilowatts)", ylab = "Frequency")
+dev.off()
+
